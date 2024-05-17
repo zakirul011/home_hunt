@@ -1,0 +1,8 @@
+<%- include("./partials/header.ejs")  %>
+<section class="error-page page-style">
+    <h1><%= error.status %></h1>
+    <h3><%= error.message %></h3>
+    <h5><%= error.stack %></h5>
+    <a class="button-style"href="/">Go Home</a>
+</section>
+<%- include("./partials/footer.ejs")  %>

@@ -1,0 +1,29 @@
+<header>
+    <img src="img/logo.png" alt=""> 
+    <div>
+      <a class="button-style"href="/">Home</a>
+      <a class="button-style" href="users">Users</a>
+      <% if(loggedUser && loggedUser.username){ %>
+        <a class="button-style" href="post">Post</a>
+        <button class="button-style" onclick="logout()">Logout</button>
+        <% }else{ %>
+        <a class="button-style"href="login">Login</a>
+      <% } %>
+    </div>
+</header>
+
+<script>
+  const logoutToast = Toastify({
+    text: "You are begin logged out....",
+    duration : 1000
+  })
+  function logout() {
+    fetch('/login', {
+      method: "DELETE"
+    });
+    logoutToast.showToast();
+    setTimeout(() => {
+      window.location.replace('/')
+    }, 1000);
+  }
+</script>

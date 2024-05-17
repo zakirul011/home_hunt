@@ -1,0 +1,32 @@
+<%- include("./partials/header.ejs")  %>
+<%- include("./partials/menu.ejs")  %>
+<section class="login-page page-style">
+  <div class="login">
+    <h1>Welcome!</h1>
+    <h3>Login to continue</h3>
+    <form id="form" action="/login" method="post" >
+
+      <div class="input-wrapper">
+        <label>Email or Mobile No:</label>
+        <input type="text" name="username" value="<%= data.username %>"/>
+        <p class="error"><%= error.username && error.username.msg %></p>
+      </div>
+
+      <div class="input-wrapper">
+        <label>Password:</label>
+        <input type="password" name="password" />
+        <p class="error"><%= error.password && error.password.msg %></p>
+      </div>
+      
+      <% if(error.common){ %>
+        <p class="error"><%= error.common.msg %></p>
+      <% } %>
+      <button class="button-style" type="submit">Login</button>
+    </form>
+    <div class="form-bottom">
+      <h4>Don't you have an account?</h4>
+      <a class="button-style" href="signup">Sign up</a>
+    </div>
+  </div>
+</section>
+<%- include("./partials/footer.ejs")  %>

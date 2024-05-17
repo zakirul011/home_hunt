@@ -1,0 +1,66 @@
+<%- include("./partials/header.ejs")  %>
+<%- include("./partials/menu.ejs")  %>
+  <section class="post-page page-style">
+    <div class="post-content">
+      <h1>Enter Home Details</h1>
+      <form action="/post" method="post" enctype="multipart/form-data">
+
+        <div class="input-wrapper">
+          <label>Home Title:</label>
+          <input type="text" name="title" value="<%= data.title %>" />
+          <p class="error"><%= error.title && error.title.msg %></p>
+        </div>
+
+        <div class="input-wrapper">
+          <label>Beds:</label>
+          <input type="number" name="bed" value="<%= data.bed %>" />
+          <p class="error"><%= error.bed && error.bed.msg %></p>
+        </div>
+
+        <div class="input-wrapper">
+          <label>Baths:</label>
+          <input type="number" name="bath" value="<%= data.bath %>" />
+          <p class="error"><%= error.bath && error.bath.msg %></p>
+        </div>
+
+        <div class="input-wrapper">
+          <label>Price:</label>
+          <input type="number" name="price" value="<%= data.price %>" />
+          <p class="error"><%= error.price && error.price.msg %></p>
+        </div>
+
+        <div class="input-wrapper">
+          <label>Mobile:</label>
+          <input type="text" name="mobile" value="<%= data.mobile || loggedUser.mobile %>" />
+          <p class="error"><%= error.mobile && error.mobile.msg %></p>
+        </div>
+
+        <div class="input-wrapper">
+          <label>Email:</label>
+          <input type="email" name="email" value="<%= data.email || loggedUser.email %>" />
+          <p class="error"><%= error.email && error.email.msg %></p>
+        </div>
+
+        <div class="input-wrapper">
+          <label>Address:</label>
+          <input type="text" name="address" value="<%= data.address %>" />
+          <p class="error"><%= error.address && error.address.msg %></p>
+        </div>
+
+        <div class="input-wrapper">
+          <label>Image:</label>
+          <input type="file" name="file" />
+          <p class="error"><%= error.file && error.file.msg %></p>
+        </div>
+
+        <% if(error.common){ %>
+          <p class="error"><%= error.common.msg %></p>
+        <% } %>
+
+        <button class="button-style" type="submit">Post</button>
+        <br />
+        <br />
+      </form>
+    </div>
+  </section>
+<%- include("./partials/footer.ejs")  %>

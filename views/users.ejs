@@ -1,0 +1,60 @@
+<%- include("./partials/header.ejs")  %>
+<%- include("./partials/menu.ejs")  %>
+
+  
+<section class="home-container page-style user-style">
+
+  <% users.forEach(user=>{ %>
+  <div class="outer" id="<%= user._id %>">
+    <div class="inner">
+      <% if(user.avater) { %>
+        <img src="./uploads/avaters/<%= user.avater %>" alt="">
+      <% } %>
+      <div>
+        <h3><%= user.name %></h3>
+        <h4><%= user.mobile %></h4>
+
+        <div class="contact-button">
+          <% if(loggedUser && loggedUser.username){ %>
+          <button class="button-style" onclick="deleteUser('<%= user._id %>')">Delete</button>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }) %>
+  <% if(users.length == 0){ %>
+    <div style="width: 100%; text-align: center;">
+      <h1>There is no user!</h1>
+    </div>
+  <% } %>
+</section>
+
+  
+
+  <script>
+    const deleteToast = Toastify({
+      text: "The user was Deleted Sucessfully!",
+      duration: 3000
+    })
+    const deleteErrorToast = Toastify({
+      text: "Could not delete the user!",
+      duration: 3000
+    })
+    async function deleteUser(userId) {
+      let response = await fetch(`/users/${userId}`,{
+        method: "DELETE"
+      })
+
+      let result = response.json();
+
+      if(result.error){
+        deleteErrorToast.showToast();
+      }else{
+        deleteToast.showToast();
+        document.getElementById(userId).remove();
+      }
+      
+    }
+  </script>
+<%- include("./partials/footer.ejs")  %>

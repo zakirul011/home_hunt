@@ -1,0 +1,53 @@
+<%- include("./partials/header.ejs")  %>
+<%- include("./partials/menu.ejs")  %>
+
+<section class="signup-page page-style">
+  <div class="signup">
+    <h1>Signup page</h1>
+    <h3>Enter your details</h3>
+    <form id="form" action="/signup" method="post" enctype="multipart/form-data">
+      
+      <div class="input-wrapper">
+        <label>Fullname:</label>
+        <input type="text" name="name" value="<%= data.name %>"/>
+        <p class="error"><%= error.name && error.name.msg %></p>
+      </div>
+      
+      <div class="input-wrapper">
+        <label>Email:</label>
+        <input type="email" name="email" value="<%= data.email %>"/>
+        <p class="error"><%= error.email && error.email.msg %></p>
+      </div>
+      
+      <div class="input-wrapper">
+        <label>Mobile:</label>
+        <input type="tel" name="mobile" value="<%= data.mobile %>"/>
+        <p class="error"><%= error.mobile && error.mobile.msg %></p>
+      </div>
+      
+      <div class="input-wrapper">
+        <label>Password:</label>
+        <input type="password" name="password" value="<%= data.password %>"/>
+        <p class="error"><%= error.password && error.password.msg %></p>
+      </div>
+
+      <div class="input-wrapper">
+        <label>Avater:</label>
+        <input type="file" name="avater" />
+        <p class="error"><%= error.avater && error.avater.msg %></p>
+      </div>
+      
+      <% if(error.common){ %>
+        <p class="error"><%= error.common.msg %></p>
+      <% } %>
+
+      <button class="button-style" type="submit">Submit</button>
+    </form>
+    <div>
+      <h4>Do you have an account?</h4>
+      <a class="button-style" href="login">Login</a>
+    </div>
+  </div>
+</section>
+
+<%- include("./partials/footer.ejs")  %>
