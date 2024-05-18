@@ -17,13 +17,16 @@ const {
   postValidatorHanlder,
 } = require("./../middleware/post/postValidator");
 
+// page title
+const pageTitle = "Post Page";
+
 // post page
-router.get("/", decorateHtml("Post Page"), checkLogin, getPost);
+router.get("/", decorateHtml(pageTitle), checkLogin, getPost);
 
 // add post
 router.post(
   "/",
-  decorateHtml("Post Page"),
+  decorateHtml(pageTitle),
   checkLogin,
   postUpload,
   postValidator,

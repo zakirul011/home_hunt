@@ -9,8 +9,11 @@ const { checkLogin } = require("./../middleware/common/checkLogin");
 // creating router
 const router = express.Router();
 
+// page title
+const pageTitle = "Users";
+
 // get users page
-router.get("/", decorateHtml("Users"), checkLogin, getUsersPage);
+router.get("/", decorateHtml(pageTitle), checkLogin, getUsersPage);
 
 // delete the user
 router.delete("/:id", removeUser);

@@ -12,7 +12,7 @@ const {
   LoginValidation,
   loginValidationHandle,
 } = require("./../middleware/login/loginValidators");
-const page_title = "Login";
+const pageTitle = "Login";
 
 const { redirectLoginPage } = require("./../middleware/common/checkLogin");
 
@@ -20,12 +20,12 @@ const { redirectLoginPage } = require("./../middleware/common/checkLogin");
 const router = express.Router();
 
 // get login page
-router.get("/", decorateHtml(page_title), redirectLoginPage, getLoginPage);
+router.get("/", decorateHtml(pageTitle), redirectLoginPage, getLoginPage);
 
 // get logged in
 router.post(
   "/",
-  decorateHtml(page_title),
+  decorateHtml(pageTitle),
   LoginValidation,
   loginValidationHandle,
   login

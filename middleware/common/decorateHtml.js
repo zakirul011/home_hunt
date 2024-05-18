@@ -4,6 +4,8 @@ const decorateHtml = (title) => {
     res.locals.title = title + " | " + process.env.APP_NAME;
     res.locals.error = {};
     res.locals.data = {};
+    res.locals.query = "";
+    res.locals.postCount = "";
     res.locals.loggedUser = {};
 
     next();

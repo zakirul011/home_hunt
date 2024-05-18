@@ -1,5 +1,20 @@
 <%- include("./partials/header.ejs")  %>
 <%- include("./partials/menu.ejs")  %>
+
+  <% if(posts.length != 0){ %>
+  <div class="search-container">
+    <form action="/search" method="get">
+      <div class="input-wrapper">
+          <input type="text" placeholder="Search here..." name="query" value="<%= query %>">
+      </div>
+      <button class="button-style" type="submit">Search</button>
+      <% if(postCount !== ""){ %>
+        <p class="error">Search result : <%= postCount %> </p>
+      <% } %>
+    </form>
+  </div>
+  <% } %>
+
   <section class="home-container page-style">
     <% posts.forEach(function(post) { %>
       <div class="outer" id="<%= post.id %>">
@@ -27,14 +42,8 @@
       <% }); %>
       <% if(posts.length == 0){ %>
       <div style="width: 100%; text-align: center;">
-        <h1>Homes are not available!</h1>
-        <% if(loggedUser && loggedUser.username){ %>
-        <p>Please post a home for rent</p>
-        <a href="/post" class="button-style">Post</a>
-        <% }else{ %>
-        <p>Please Login and post a home for rent</p>
-        <a href="/login" class="button-style">login</a>
-        <% } %>
+        <h1>Homes are not found!</h1>
+        <a href="/" class="button-style">Refrash</a>
       </div>
       <% } %>
   </section>
@@ -62,6 +71,12 @@
         document.getElementById(postId).remove();
       }
     }
+
+    document.querySelector('.search-container input').addEventListener('change', (e)=>{
+      if (!e.target.value) {
+        location = '/';
+      }
+    })
   </script>
 
 <%- include("./partials/footer.ejs")  %>

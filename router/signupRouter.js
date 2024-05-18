@@ -16,12 +16,15 @@ const {
 // creating router
 const router = express.Router();
 
+// page title
+const pageTitle = "Signup";
+
 // get signup page
-router.get("/", decorateHtml("Signup"), getSignupPage);
+router.get("/", decorateHtml(pageTitle), getSignupPage);
 
 router.post(
   "/",
-  decorateHtml("Signup"),
+  decorateHtml(pageTitle),
   avaterUploader,
   userValidator,
   userValidatorHandle,

@@ -28,13 +28,14 @@ async function login(req, res, next) {
           username: user.name,
           mobile: user.mobile,
           email: user.email,
+          role: "user",
         };
 
         const token = jwt.sign(userObject, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_EXPRIRE,
         });
 
-        // ser cookie
+        // set cookie
         res.cookie(process.env.COOKIE_NAME, token, {
           maxAge: process.env.JWT_EXPRIRE,
           httpOnly: true,
