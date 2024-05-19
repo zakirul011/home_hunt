@@ -1,7 +1,7 @@
 <%- include("./partials/header.ejs")  %>
 <%- include("./partials/menu.ejs")  %>
 
-  <% if(posts.length != 0){ %>
+  <% if(posts.length != 0 || postCount !== ""){ %>
   <div class="search-container">
     <form action="/search" method="get">
       <div class="input-wrapper">
@@ -43,7 +43,13 @@
       <% if(posts.length == 0){ %>
       <div style="width: 100%; text-align: center;">
         <h1>Homes are not found!</h1>
-        <a href="/" class="button-style">Refrash</a>
+        <% if(postCount === 0){ %>
+          <a href="/" class="button-style">Refrash</a>
+        <% }else if(loggedUser && loggedUser.username){ %>
+          <a href="/post" class="button-style">Post</a>
+        <% }else{ %>
+          <a href="/login" class="button-style">Login</a>
+        <% } %>
       </div>
       <% } %>
   </section>
