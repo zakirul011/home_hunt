@@ -12,6 +12,10 @@ const {
   userValidator,
   userValidatorHandle,
 } = require("./../middleware/user/userValidator");
+const {
+  checkLogin,
+  requiredRole,
+} = require("./../middleware/common/checkLogin");
 
 // creating router
 const router = express.Router();
@@ -20,11 +24,19 @@ const router = express.Router();
 const pageTitle = "Signup";
 
 // get signup page
-router.get("/", decorateHtml(pageTitle), getSignupPage);
+router.get(
+  "/",
+  decorateHtml(pageTitle),
+  checkLogin,
+  requiredRole(["admin"]),
+  getSignupPage
+);
 
 router.post(
   "/",
   decorateHtml(pageTitle),
+  checkLogin,
+  requiredRole(["admin"]),
   avaterUploader,
   userValidator,
   userValidatorHandle,

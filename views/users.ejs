@@ -15,7 +15,7 @@
         <h4><%= user.mobile %></h4>
 
         <div class="contact-button">
-          <% if(loggedUser && loggedUser.username){ %>
+          <% if(loggedUser && loggedUser.role == "admin"){ %>
           <button class="button-style" onclick="deleteUser('<%= user._id %>')">Delete</button>
           <% } %>
         </div>
@@ -46,7 +46,8 @@
         method: "DELETE"
       })
 
-      let result = response.json();
+      let result = await response.json();
+
 
       if(result.error){
         deleteErrorToast.showToast();

@@ -2,8 +2,12 @@
     <img src="img/logo.png" alt=""> 
     <div>
       <a class="button-style"href="/">Home</a>
-      <a class="button-style" href="users">Users</a>
+      
       <% if(loggedUser && loggedUser.username){ %>
+        <% if(loggedUser.role == "admin"){ %>
+          <a class="button-style" href="signup">Add Man</a>
+        <% } %>
+        <a class="button-style" href="users">Managers</a>
         <a class="button-style" href="post">Post</a>
         <button class="button-style" onclick="logout()">Logout</button>
         <% }else{ %>

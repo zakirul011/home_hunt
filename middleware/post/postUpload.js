@@ -3,7 +3,7 @@ const uploader = require("../../utilities/singleUploader");
 const postUpload = (req, res, next) => {
   const upload = uploader(
     "post",
-    ["image/jpeg", "image/jpg", "image/png"],
+    ["image/jpeg", "image/jpg", "image/png", "image/webp"],
     10000000,
     "Image Upload failed!"
   );

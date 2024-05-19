@@ -1,6 +1,18 @@
 <%- include("./partials/header.ejs")  %>
 <%- include("./partials/menu.ejs")  %>
 
+<% if(loggedUser && loggedUser.username){ %>
+  <h2>
+    <center>
+      <% if(loggedUser.role == "admin"){ %>
+        Welcome Admin!
+      <% }else{ %>
+        Welcome <%= loggedUser.username %>
+      <% } %>
+    </center>
+  </h1>
+<% } %>
+
   <% if(posts.length != 0 || postCount !== ""){ %>
   <div class="search-container">
     <form action="/search" method="get">
@@ -15,6 +27,8 @@
   </div>
   <% } %>
 
+
+
   <section class="home-container page-style">
     <% posts.forEach(function(post) { %>
       <div class="outer" id="<%= post.id %>">
@@ -25,7 +39,7 @@
             <ul>
               <li>Bed: <%= post.bed %></li>
               <li>Bath: <%= post.bath %></li>
-              <li>Price: <%= post.price %></li>
+              <li>Price: <%= post.price %> BDT</li>
               <li><%= post.address %></li>
               <li>Phone: <%= post.mobile %></li>
             </ul>
@@ -68,13 +82,16 @@
       const response = await fetch('/post/'+postId, {
         method: "DELETE",
       })
-      const result = response.json();
+      const result = await response.json();
 
       if(result.error){
         deleteErrorToast.showToast();
       }else{
         deleteToast.showToast();
         document.getElementById(postId).remove();
+        setTimeout(() => {
+          location = '/';
+        }, 1000);
       }
     }
 

@@ -4,7 +4,10 @@ const express = require("express");
 // internal
 const { getUsersPage, removeUser } = require("./../controller/usersController");
 const decorateHtml = require("./../middleware/common/decorateHtml");
-const { checkLogin } = require("./../middleware/common/checkLogin");
+const {
+  checkLogin,
+  requiredRole,
+} = require("./../middleware/common/checkLogin");
 
 // creating router
 const router = express.Router();
@@ -16,7 +19,7 @@ const pageTitle = "Users";
 router.get("/", decorateHtml(pageTitle), checkLogin, getUsersPage);
 
 // delete the user
-router.delete("/:id", removeUser);
+router.delete("/:id", checkLogin, requiredRole(["admin"]), removeUser);
 
 // export
 module.exports = router;

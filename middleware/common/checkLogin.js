@@ -1,6 +1,8 @@
+const createHttpError = require("http-errors");
 const jwt = require("jsonwebtoken");
 
 const checkLogin = (req, res, next) => {
+  req.user = {};
   let cookies =
     Object.keys(req.signedCookies).length > 0 ? req.signedCookies : null;
   if (cookies) {
@@ -31,4 +33,24 @@ const redirectLoginPage = (req, res, next) => {
   }
 };
 
-module.exports = { checkLogin, redirectLoginPage };
+const requiredRole = (roles) => {
+  return (req, res, next) => {
+    if (req.user.role && roles.includes(req.user.role)) {
+      next();
+    } else {
+      if (res.locals.html) {
+        next(createHttpError(401, "You are not allow to access the Page"));
+      } else {
+        res.json({
+          error: {
+            common: {
+              msg: "You are not allow to access the Page",
+            },
+          },
+        });
+      }
+    }
+  };
+};
+
+module.exports = { checkLogin, redirectLoginPage, requiredRole };

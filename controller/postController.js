@@ -67,4 +67,3 @@ const removePost = (req, res, next) => {
 };
 
 module.exports = { getPost, addPost, removePost };
-
