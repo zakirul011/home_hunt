@@ -189,3 +189,10 @@ header img {
 .user-style h3 {
   color: black;
 }
+
+footer {
+  text-align: center;
+  padding: 50px;
+  background: darkslategray;
+  color: white;
+}
